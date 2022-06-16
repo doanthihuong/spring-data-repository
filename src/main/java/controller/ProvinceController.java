@@ -33,14 +33,15 @@ public class ProvinceController {
     @PostMapping("/create")
     public ModelAndView save(Province province) {
         provinceService.save(province);
-        ModelAndView modelAndView =new ModelAndView("redirect:/provinces");
+        ModelAndView modelAndView = new ModelAndView("redirect:/provinces");
         return modelAndView;
     }
+
     @GetMapping("/edit/{id}")
     public ModelAndView showEditForm(@PathVariable Long id) {
         ModelAndView modelAndView = new ModelAndView("/province/edit");
-      Province province =provinceService.findById(id).get();
-      modelAndView.addObject("pro", province);
+        Province province = provinceService.findById(id).get();
+        modelAndView.addObject("pro", province);
         return modelAndView;
     }
 
@@ -54,4 +55,23 @@ public class ProvinceController {
         return modelAndView;
     }
 
+    @GetMapping("/delete/{id}")
+    public ModelAndView showDeleteForm(@PathVariable Long id) {
+        ModelAndView modelAndView = new ModelAndView("/province/delete");
+        Province province = provinceService.findById(id).get();
+        modelAndView.addObject("pro", province);
+        return modelAndView;
+
+    }
+
+    @PostMapping("/delete/{id}")
+    public ModelAndView delete(@PathVariable Long id) {
+        ModelAndView modelAndView = new ModelAndView("redirect:/provinces");
+//        Province oldProvince = provinceService.findById(id).get();
+//        oldProvince.setDescription(province.getDescription());
+//        oldProvince.setName(province.getName());
+        provinceService.remove(id);
+        return modelAndView;
+
+    }
 }

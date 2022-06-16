@@ -7,12 +7,13 @@
 </head>
 <body>
 <a href="/provinces/create">
-    Tạo mới tỉnh
+    Add new province
 </a>
 <div  th:each="pro : ${province}" >
     <span th:text="${pro.name}"></span>
     <span th:text="${pro.description}"></span>
-    <a th:href="@{/provinces/edit/__${pro.id}__}">Sửa</a>
+    <a th:href="@{/provinces/edit/__${pro.id}__}">Edit</a>
+    <a th:href="@{/provinces/delete/__${pro.id}__}">Delete</a>
 </div>
 </body>
 </html>
