@@ -40,6 +40,17 @@ public class ProvinceController {
     public ModelAndView showEditForm(@PathVariable Long id) {
         ModelAndView modelAndView = new ModelAndView("/province/edit");
       Province province =provinceService.findById(id).get();
+      modelAndView.addObject("pro", province);
+        return modelAndView;
+    }
+
+    @PostMapping("/edit/{id}")
+    public ModelAndView update(@PathVariable Long id, Province province) {
+        ModelAndView modelAndView = new ModelAndView("redirect:/provinces");
+//        Province oldProvince = provinceService.findById(id).get();
+//        oldProvince.setDescription(province.getDescription());
+//        oldProvince.setName(province.getName());
+        provinceService.save(province);
         return modelAndView;
     }
 
